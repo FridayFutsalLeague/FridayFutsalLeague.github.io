@@ -140,41 +140,53 @@ footer img{width:48px!important;height:56px!important;max-width:48px!important;o
     table-layout:fixed;
   }
 
-  /* Show only: Pos, Player, Pts, Goals, Assists */
-  th:nth-child(3), td:nth-child(3),
-  th:nth-child(5), td:nth-child(5),
-  th:nth-child(6), td:nth-child(6),
-  th:nth-child(7), td:nth-child(7),
-  th:nth-child(10), td:nth-child(10),
-  th:nth-child(11), td:nth-child(11) {
-    display:none;
+  /* Mobile leaderboard: show ALL stats and swipe horizontally */
+  .table-wrap {
+    overflow-x:auto !important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    width:100%;
   }
 
-  th, td {
-    padding:11px 4px !important;
-    font-size:11px !important;
-    overflow:hidden;
-    text-overflow:ellipsis;
+  table {
+    width:1080px !important;
+    min-width:1080px !important;
+    table-layout:auto;
   }
+
+  /* Show every leaderboard column on mobile */
+  th, td {
+    display:table-cell !important;
+    padding:11px 8px !important;
+    font-size:11px !important;
+    white-space:nowrap;
+  }
+
   th { font-size:8px !important; }
 
-  th:nth-child(1), td:nth-child(1) {
-    width:10%;
-    text-align:center;
-  }
+  th:nth-child(1), td:nth-child(1) { width:44px; text-align:center; }
+
+  /* Sticky player column */
   th:nth-child(2), td:nth-child(2) {
-    width:38%;
+    width:155px;
+    min-width:155px;
     text-align:left;
+    position:sticky;
+    left:0;
+    z-index:3;
+    background:var(--panel, #101214);
+    box-shadow:6px 0 10px rgba(0,0,0,.28);
   }
-  th:nth-child(4), td:nth-child(4) {
-    width:18%;
-    text-align:center;
-  }
-  th:nth-child(8), td:nth-child(8),
-  th:nth-child(9), td:nth-child(9) {
-    width:17%;
-    text-align:center;
-  }
+
+  th:nth-child(3), td:nth-child(3) { width:58px; text-align:center; }   /* Apps */
+  th:nth-child(4), td:nth-child(4) { width:62px; text-align:center; }   /* Pts */
+  th:nth-child(5), td:nth-child(5) { width:76px; text-align:center; }   /* Goal/App */
+  th:nth-child(6), td:nth-child(6) { width:82px; text-align:center; }   /* Assist/App */
+  th:nth-child(7), td:nth-child(7) { width:112px; text-align:center; }  /* GI */
+  th:nth-child(8), td:nth-child(8) { width:62px; text-align:center; }   /* Goals */
+  th:nth-child(9), td:nth-child(9) { width:68px; text-align:center; }   /* Assists */
+  th:nth-child(10), td:nth-child(10) { width:62px; text-align:center; } /* TOTW */
+  th:nth-child(11), td:nth-child(11) { width:62px; text-align:center; } /* POTW */
 
   /* Top 5 cards: one per row */
   .top-five-section { margin-top:18px; }
