@@ -9,25 +9,27 @@
 </head>
 <body>
   <header class="topbar">
-    <div>
-      <div class="brand">FFL</div>
-      <small>Friday Futsal League</small>
-    </div>
+    <a class="brand-lockup" href="#" aria-label="FFL home">
+      <img src="assets/ffl-logo.png" alt="FFL logo">
+      <div><div class="brand">FFL</div><small>Friday Futsal League</small></div>
+    </a>
     <nav>
       <a class="active" href="#">Home</a>
       <a href="#leaderboard">Players</a>
-      <a href="#weekly">Weekly</a>
-      <a href="#teams">Teams</a>
+      <a href="#top-five">Top 5</a>
     </nav>
     <div class="week">2026 SEASON</div>
   </header>
 
   <main>
     <section class="hero">
-      <p>Season stats</p>
-      <h1>FFL Player Stats</h1>
-      <span>Live player stats from the Friday Futsal League.</span>
-      <div id="dataStatus" class="data-status">Loading live stats…</div>
+      <img class="hero-logo" src="assets/ffl-logo.png" alt="Friday Futsal League crest">
+      <div>
+        <p>Season stats</p>
+        <h1>FFL Player Stats</h1>
+        <span>Live player stats from the Friday Futsal League.</span>
+        <div id="dataStatus" class="data-status">Loading live stats…</div>
+      </div>
     </section>
 
     <section class="cards">
@@ -40,14 +42,24 @@
 
     <section class="panel" id="leaderboard">
       <div class="panel-head">
-        <div><p>Leaderboard</p><h2>Player standings</h2></div>
-        <input id="search" type="search" placeholder="Search player..." autocomplete="off">
+        <div><p>Leaderboard</p><h2>Top 20 players</h2></div>
+        <input id="search" type="search" placeholder="Search top 20..." autocomplete="off">
       </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Pos</th><th>Player</th><th>Apps</th><th>Pts</th><th>Wins</th><th>Draws</th><th>CS</th><th>Goals</th><th>Assists</th><th>TOTW</th><th>POTW</th>
+              <th>Pos</th>
+              <th>Player</th>
+              <th>Apps</th>
+              <th>Pts</th>
+              <th>Goal / App</th>
+              <th>Assist / App</th>
+              <th>Goal Involvement</th>
+              <th>Goals</th>
+              <th>Assists</th>
+              <th>TOTW</th>
+              <th>POTW</th>
             </tr>
           </thead>
           <tbody id="leaderboardBody">
@@ -57,11 +69,21 @@
       </div>
     </section>
 
-    <section class="lower">
-      <article class="panel" id="weekly"><p>Next</p><h2>Weekly results</h2><span>Latest round, POTW and TOTW will be added here next.</span></article>
-      <article class="panel" id="teams"><p>Teams</p><h2>Team standings</h2><span>Red, White, Blue and Black standings will be added here next.</span></article>
+    <section class="top-five-section" id="top-five">
+      <div class="section-heading"><p>League leaders</p><h2>Top 5</h2></div>
+      <div class="top-five-grid">
+        <article class="panel stat-list"><h3>⚽ Top 5 Goal Scorers</h3><ol id="topGoals"></ol></article>
+        <article class="panel stat-list"><h3>🎯 Top 5 Assists</h3><ol id="topAssists"></ol></article>
+        <article class="panel stat-list"><h3>☆ Top 5 TOTW</h3><ol id="topTotw"></ol></article>
+        <article class="panel stat-list"><h3>⭐ Top 5 POTW</h3><ol id="topPotw"></ol></article>
+      </div>
     </section>
   </main>
+
+  <footer>
+    <img src="assets/ffl-logo.png" alt="FFL logo">
+    <div><strong>FFL</strong><span>Friday Futsal League</span></div>
+  </footer>
 
   <script src="script.js"></script>
 </body>

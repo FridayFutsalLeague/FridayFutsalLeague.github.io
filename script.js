@@ -64,14 +64,23 @@ function rowToPlayer(row) {
   };
 }
 
+function sortBy(key) {
+  return [...players].sort((a, b) =>
+    (b[key] - a[key]) ||
+    (b.pts - a.pts) ||
+    (b.goals - a.goals) ||
+    a.player.localeCompare(b.player)
+  );
+}
+
 function leader(key) {
-  return [...players].sort((a, b) => (b[key] || 0) - (a[key] || 0))[0];
+  return sortBy(key)[0];
 }
 
 function setLeader(nameId, valueId, key) {
   const p = leader(key);
   document.getElementById(nameId).textContent = p?.player || "—";
-  document.getElementById(valueId).textContent = p ? p[key] : "—";
+  document.getElementById(valueId).textContent = p ? formatValue(p[key], key) : "—";
 }
 
 function renderCards() {
@@ -85,26 +94,26 @@ function renderCards() {
 function rankedPlayers() {
   return [...players].sort((a, b) =>
     (b.pts - a.pts) ||
-    (b.wins - a.wins) ||
     (b.goals - a.goals) ||
     (b.assists - a.assists) ||
     a.player.localeCompare(b.player)
   );
 }
 
-function display(value) {
-  return value === 0 ? "0" : value;
+function formatValue(value, key = "") {
+  if (["goalsPerApp", "assistsPerApp", "goalInvolvementPerApp"].includes(key)) {
+    return Number(value).toFixed(2);
+  }
+  return Number.isInteger(value) ? String(value) : String(value);
 }
 
 function render(query = "") {
-  const ranked = rankedPlayers();
+  const top20 = rankedPlayers().slice(0, 20).map((p, index) => ({ ...p, position: index + 1 }));
   const search = query.trim().toLowerCase();
-  const rows = ranked
-    .map((p, index) => ({ ...p, position: index + 1 }))
-    .filter(p => p.player.toLowerCase().includes(search));
+  const rows = top20.filter(p => p.player.toLowerCase().includes(search));
 
   if (!rows.length) {
-    tbody.innerHTML = '<tr><td colspan="11">No players found.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="11">No players found in the top 20.</td></tr>';
     return;
   }
 
@@ -112,16 +121,34 @@ function render(query = "") {
     <tr>
       <td>${p.position}</td>
       <td>${escapeHTML(p.player)}</td>
-      <td>${display(p.apps)}</td>
-      <td>${display(p.pts)}</td>
-      <td>${display(p.wins)}</td>
-      <td>${display(p.draws)}</td>
-      <td>${display(p.cs)}</td>
-      <td>${display(p.goals)}</td>
-      <td>${display(p.assists)}</td>
-      <td>${display(p.totw)}</td>
-      <td>${display(p.potw)}</td>
+      <td>${p.apps}</td>
+      <td class="points-cell">${p.pts}</td>
+      <td>${formatValue(p.goalsPerApp, "goalsPerApp")}</td>
+      <td>${formatValue(p.assistsPerApp, "assistsPerApp")}</td>
+      <td>${formatValue(p.goalInvolvementPerApp, "goalInvolvementPerApp")}</td>
+      <td>${p.goals}</td>
+      <td>${p.assists}</td>
+      <td>${p.totw}</td>
+      <td>${p.potw}</td>
     </tr>`).join("");
+}
+
+function renderTopFive(listId, key) {
+  const list = document.getElementById(listId);
+  const top = sortBy(key).slice(0, 5);
+  list.innerHTML = top.map((p, index) => `
+    <li>
+      <span class="rank">${index + 1}</span>
+      <span class="name">${escapeHTML(p.player)}</span>
+      <strong>${formatValue(p[key], key)}</strong>
+    </li>`).join("");
+}
+
+function renderTopFiveLists() {
+  renderTopFive("topGoals", "goals");
+  renderTopFive("topAssists", "assists");
+  renderTopFive("topTotw", "totw");
+  renderTopFive("topPotw", "potw");
 }
 
 function escapeHTML(value) {
@@ -150,6 +177,7 @@ async function loadLiveStats() {
     if (!players.length) throw new Error("No player data could be read");
 
     renderCards();
+    renderTopFiveLists();
     render(searchEl.value);
     statusEl.textContent = `Live data connected • ${players.length} players`;
     statusEl.classList.add("connected");

@@ -1,6 +1,13 @@
 # FFL Stats — Live Google Sheet Build
 
-This version loads live player stats from the published `Website Data` CSV in the Friday Futsal League 2026 Google Sheet.
+This version loads live player stats from the published `Website Data` CSV.
+
+## Changes in this build
+- Main leaderboard shows only the top 20 players by points.
+- Wins, Draws and Clean Sheets removed from the main table.
+- Goal/App, Assist/App and Goal Involvement added.
+- Added Top 5 Goal Scorers, Assists, TOTW and POTW lists.
+- Added the FFL crest/logo in the header, hero and footer.
 
 ## Upload/update GitHub
 Replace the existing files in the root of the `FFL-Stats` repository with:
@@ -8,9 +15,7 @@ Replace the existing files in the root of the `FFL-Stats` repository with:
 - `style.css`
 - `script.js`
 
-You can delete the old `data.js` file because it is no longer used.
+Also upload the new folder:
+- `assets/ffl-logo.png`
 
-GitHub Pages should then rebuild automatically from the `main` branch.
-
-## Data flow
-Friday Futsal League tab → Website Data tab → published CSV → GitHub Pages site.
+GitHub Pages should rebuild automatically from the `main` branch.
