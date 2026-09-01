@@ -26,176 +26,187 @@ footer img{width:48px!important;height:56px!important;max-width:48px!important;o
 @media(max-width:720px){.hero-logo{width:92px!important;height:108px!important;max-width:92px!important;flex-basis:92px!important}}
 @media(max-width:480px){.hero-logo{width:72px!important;height:88px!important;max-width:72px!important;flex-basis:72px!important}}
 
-
-/* ===== FFL MOBILE EXPERIENCE ===== */
-.mobile-player-detail { display: none; }
+/* ===== FFL MOBILE EXPERIENCE — FIXED ===== */
+.mobile-table-hint { display:none; }
 
 @media (max-width: 720px) {
-  body { overflow-x: hidden; }
+  body { overflow-x:hidden; }
 
-  .topbar,
-  .hero,
-  .section,
-  .footer-inner {
-    width: min(100% - 24px, 1180px);
-  }
-
+  /* Header */
   .topbar {
-    min-height: 64px;
-    gap: 10px;
+    height:64px;
+    padding:0 14px;
+    width:100%;
+  }
+  .brand-lockup img {
+    width:38px !important;
+    height:42px !important;
+    max-width:38px !important;
+  }
+  .brand { font-size:24px; }
+  .topbar nav { display:none !important; }
+  .week {
+    padding:8px 10px;
+    font-size:9px;
+    white-space:nowrap;
   }
 
-  .brand-logo,
-  .hero-logo {
-    max-width: 52px !important;
-    max-height: 52px !important;
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain;
+  /* Main content */
+  main {
+    width:100%;
+    padding:18px 12px 48px;
   }
-
-  .brand-title { font-size: 1rem; }
-  .brand-subtitle { font-size: .68rem; }
-
-  .topbar nav,
-  .desktop-nav { display: none !important; }
 
   .hero {
-    padding-top: 26px;
-    padding-bottom: 24px;
+    min-height:0;
+    padding:14px 2px 20px;
+    gap:14px;
+    align-items:center;
+  }
+  .hero-logo {
+    width:58px !important;
+    height:68px !important;
+    max-width:58px !important;
+    flex:0 0 58px !important;
+  }
+  .hero p { font-size:9px; margin-bottom:5px; }
+  .hero h1 {
+    font-size:clamp(30px, 9vw, 40px);
+    line-height:1;
+    margin-bottom:7px;
+  }
+  .hero span { font-size:12px; }
+  .data-status { font-size:10px; margin-top:8px; }
+
+  /* Five leader cards: horizontal swipe */
+  .cards {
+    display:flex !important;
+    grid-template-columns:none !important;
+    overflow-x:auto;
+    gap:10px;
+    margin:0 -12px 18px;
+    padding:0 12px 8px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .cards::-webkit-scrollbar { display:none; }
+  .cards article {
+    flex:0 0 72vw;
+    max-width:280px;
+    min-height:138px;
+    scroll-snap-align:start;
+    padding:14px;
+  }
+  .stat-icon {
+    width:50px;
+    height:50px;
+  }
+  .cards strong { font-size:17px; }
+  .cards em { font-size:23px; }
+
+  /* Leaderboard */
+  .panel {
+    padding:14px 10px;
+    border-radius:10px;
+  }
+  .panel-head {
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .panel-head h2 { font-size:24px; }
+  .panel-head input,
+  #search {
+    width:100%;
+    min-width:0;
+    padding:11px 12px;
+  }
+  .mobile-table-hint {
+    display:block;
+    margin:0 0 8px;
+    color:var(--muted);
+    font-size:10px;
+  }
+  .table-wrap {
+    overflow-x:hidden !important;
+    width:100%;
+  }
+  table {
+    width:100% !important;
+    min-width:0 !important;
+    table-layout:fixed;
   }
 
-  .hero h1 { font-size: clamp(2rem, 11vw, 3.25rem); }
-  .hero p { font-size: .9rem; }
-
-  /* Leader cards become a swipeable row */
-  .leader-grid,
-  .leaders-grid,
-  .hero-cards,
-  .stat-cards {
-    display: flex !important;
-    overflow-x: auto;
-    gap: 12px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
-    scrollbar-width: none;
-  }
-
-  .leader-grid::-webkit-scrollbar,
-  .leaders-grid::-webkit-scrollbar,
-  .hero-cards::-webkit-scrollbar,
-  .stat-cards::-webkit-scrollbar { display: none; }
-
-  .leader-grid > *,
-  .leaders-grid > *,
-  .hero-cards > *,
-  .stat-cards > * {
-    flex: 0 0 82%;
-    min-width: 0;
-    scroll-snap-align: start;
-  }
-
-  .section-head {
-    align-items: flex-start;
-    gap: 12px;
-    flex-direction: column;
-  }
-
-  .search-wrap,
-  .search-box,
-  #playerSearch {
-    width: 100% !important;
-    max-width: none !important;
-  }
-
-  /* Keep leaderboard inside the viewport */
-  .table-wrap,
-  .leaderboard-wrap {
-    overflow-x: hidden !important;
-    border-radius: 14px;
-  }
-
-  table { width: 100%; table-layout: fixed; }
-
-  /* Mobile summary columns: Pos, Player, Pts, Goals, Assists */
-  th:nth-child(4), td:nth-child(4),
+  /* Show only: Pos, Player, Pts, Goals, Assists */
+  th:nth-child(3), td:nth-child(3),
   th:nth-child(5), td:nth-child(5),
   th:nth-child(6), td:nth-child(6),
   th:nth-child(7), td:nth-child(7),
   th:nth-child(10), td:nth-child(10),
   th:nth-child(11), td:nth-child(11) {
-    display: none;
+    display:none;
   }
 
   th, td {
-    padding: 12px 5px !important;
-    font-size: .78rem !important;
+    padding:11px 4px !important;
+    font-size:11px !important;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  th { font-size:8px !important; }
+
+  th:nth-child(1), td:nth-child(1) {
+    width:10%;
+    text-align:center;
+  }
+  th:nth-child(2), td:nth-child(2) {
+    width:38%;
+    text-align:left;
+  }
+  th:nth-child(4), td:nth-child(4) {
+    width:18%;
+    text-align:center;
+  }
+  th:nth-child(8), td:nth-child(8),
+  th:nth-child(9), td:nth-child(9) {
+    width:17%;
+    text-align:center;
   }
 
-  th:nth-child(1), td:nth-child(1) { width: 11%; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 39%; }
-  th:nth-child(3), td:nth-child(3) { width: 14%; text-align: center; }
-  th:nth-child(8), td:nth-child(8) { width: 18%; text-align: center; }
-  th:nth-child(9), td:nth-child(9) { width: 18%; text-align: center; }
-
-  tbody tr { cursor: pointer; }
-
-  .mobile-player-detail {
-    display: block;
-    grid-column: 1 / -1;
-    padding: 10px 12px 14px;
-    font-size: .76rem;
-    line-height: 1.55;
-    color: var(--muted, #a9a9ad);
+  /* Top 5 cards: one per row */
+  .top-five-section { margin-top:18px; }
+  .section-heading h2 { font-size:24px; }
+  .top-five-grid {
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px;
+  }
+  .stat-list h3 {
+    min-height:58px;
+    padding:10px 12px;
+    font-size:13px;
+  }
+  .stat-list h3 img {
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+  }
+  .stat-list li {
+    padding:11px 14px;
   }
 
-  /* Top-five sections stack vertically for easy reading */
-  .top-five-grid,
-  .top5-grid,
-  .rankings-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
+  footer {
+    min-height:82px;
+    padding:14px 12px;
   }
-
-  .top-five-card,
-  .top5-card,
-  .ranking-card {
-    width: 100%;
-  }
-
-  .top-five-card img,
-  .top5-card img,
-  .ranking-card img {
-    width: 38px !important;
-    height: 38px !important;
-    object-fit: contain;
-  }
-
-  .section { padding-top: 28px; padding-bottom: 28px; }
-
-  footer { text-align: center; }
 }
 
-/* Slightly tighter tablet layout */
-@media (min-width: 721px) and (max-width: 980px) {
-  .top-five-grid,
-  .top5-grid,
-  .rankings-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-
-  .leader-grid,
-  .leaders-grid,
-  .hero-cards,
-  .stat-cards { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-}
-
-.mobile-table-hint { display:none; }
-@media (max-width:720px) {
-  .mobile-table-hint {
-    display:block;
-    margin: 0 0 10px;
-    font-size:.72rem;
-    color:var(--muted,#999);
-  }
+@media (max-width: 380px) {
+  .cards article { flex-basis:82vw; }
+  th, td { font-size:10px !important; }
+  th:nth-child(2), td:nth-child(2) { width:36%; }
+  th:nth-child(4), td:nth-child(4) { width:20%; }
 }
