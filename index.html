@@ -5,25 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Friday Futsal League 2026 player stats and leaderboard.">
   <title>FFL Player Stats</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260901-6">
 </head>
 <body>
   <header class="topbar">
-    <a class="brand-lockup" href="#" aria-label="FFL home">
-      <img src="assets/ffl-logo.png" alt="FFL logo">
+    <a class="brand-lockup" href="#top" aria-label="FFL home">
+      <img src="ffl-logo.png?v=20260901-6" alt="FFL logo">
       <div><div class="brand">FFL</div><small>Friday Futsal League</small></div>
     </a>
     <nav>
-      <a class="active" href="#">Home</a>
+      <a class="active" href="#top">Home</a>
       <a href="#leaderboard">Players</a>
       <a href="#top-five">Top 5</a>
     </nav>
     <div class="week">2026 SEASON</div>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero">
-      <img class="hero-logo" src="assets/ffl-logo.png" alt="Friday Futsal League crest">
+      <img class="hero-logo" src="ffl-logo.png?v=20260901-6" alt="Friday Futsal League crest">
       <div>
         <p>Season stats</p>
         <h1>FFL Player Stats</h1>
@@ -49,22 +49,10 @@
         <table>
           <thead>
             <tr>
-              <th>Pos</th>
-              <th>Player</th>
-              <th>Apps</th>
-              <th>Pts</th>
-              <th>Goal / App</th>
-              <th>Assist / App</th>
-              <th>Goal Involvement</th>
-              <th>Goals</th>
-              <th>Assists</th>
-              <th>TOTW</th>
-              <th>POTW</th>
+              <th>Pos</th><th>Player</th><th>Apps</th><th>Pts</th><th>Goal / App</th><th>Assist / App</th><th>Goal Involvement</th><th>Goals</th><th>Assists</th><th>TOTW</th><th>POTW</th>
             </tr>
           </thead>
-          <tbody id="leaderboardBody">
-            <tr><td colspan="11">Loading live stats…</td></tr>
-          </tbody>
+          <tbody id="leaderboardBody"><tr><td colspan="11">Loading live stats…</td></tr></tbody>
         </table>
       </div>
     </section>
@@ -81,10 +69,9 @@
   </main>
 
   <footer>
-    <img src="assets/ffl-logo.png" alt="FFL logo">
+    <img src="ffl-logo.png?v=20260901-6" alt="FFL logo">
     <div><strong>FFL</strong><span>Friday Futsal League</span></div>
   </footer>
-
-  <script src="script.js"></script>
+  <script src="script.js?v=20260901-6"></script>
 </body>
 </html>

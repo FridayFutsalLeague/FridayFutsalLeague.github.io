@@ -14,3 +14,13 @@ footer{border-top:1px solid var(--border);min-height:100px;display:flex;align-it
 @media(max-width:1100px){nav{display:none}.cards{grid-template-columns:repeat(3,1fr)}.top-five-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){.hero{align-items:flex-start}.hero-logo{width:92px;height:108px}.cards{grid-template-columns:repeat(2,1fr)}.top-five-grid{grid-template-columns:1fr}.panel-head{align-items:flex-start;flex-direction:column;gap:12px}input{width:100%;min-width:0}.week{font-size:10px}.brand-lockup div div,.brand-lockup small{display:none}}
 @media(max-width:480px){.cards{grid-template-columns:1fr}.hero{gap:14px}.hero-logo{width:72px;height:88px}h1{font-size:36px}}
+
+/* GitHub Pages layout safeguards */
+img{max-width:100%;display:block}
+.brand-lockup img{width:42px!important;height:48px!important;max-width:42px!important;object-fit:contain!important}
+.hero-logo{width:150px!important;height:170px!important;max-width:150px!important;object-fit:contain!important;flex:0 0 150px!important}
+footer img{width:48px!important;height:56px!important;max-width:48px!important;object-fit:contain!important}
+.hero{min-height:210px;overflow:hidden}
+#leaderboard,#top-five{scroll-margin-top:90px}
+@media(max-width:720px){.hero-logo{width:92px!important;height:108px!important;max-width:92px!important;flex-basis:92px!important}}
+@media(max-width:480px){.hero-logo{width:72px!important;height:88px!important;max-width:72px!important;flex-basis:72px!important}}
