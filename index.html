@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FFL Player Stats</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="brand">FFL</div>
+      <small>Friday Futsal League</small>
+    </div>
+    <nav>
+      <a class="active" href="#">Home</a>
+      <a href="#leaderboard">Players</a>
+      <a href="#weekly">Weekly</a>
+      <a href="#teams">Teams</a>
+    </nav>
+    <div class="week">WEEK 31</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p>Season stats</p>
+      <h1>FFL Player Stats</h1>
+      <span>Your league stats, built for players.</span>
+    </section>
+
+    <section class="cards">
+      <article><b>🏆</b><span>Points leader</span><strong id="pointsLeader">—</strong><em id="pointsLeaderValue">—</em></article>
+      <article><b>⚽</b><span>Top goal scorer</span><strong id="goalLeader">—</strong><em id="goalLeaderValue">—</em></article>
+      <article><b>🎯</b><span>Assist leader</span><strong id="assistLeader">—</strong><em id="assistLeaderValue">—</em></article>
+      <article><b>⭐</b><span>Most POTW</span><strong id="potwLeader">—</strong><em id="potwLeaderValue">—</em></article>
+      <article><b>☆</b><span>Most TOTW</span><strong id="totwLeader">—</strong><em id="totwLeaderValue">—</em></article>
+    </section>
+
+    <section class="panel" id="leaderboard">
+      <div class="panel-head">
+        <div><p>Leaderboard</p><h2>Player standings</h2></div>
+        <input id="search" type="search" placeholder="Search player...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Pos</th><th>Player</th><th>Wins</th><th>Draws</th><th>Pts</th><th>CS</th><th>Goals</th><th>Assists</th><th>TOTW</th><th>POTW</th><th>Y</th><th>R</th></tr>
+          </thead>
+          <tbody id="leaderboardBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lower">
+      <article class="panel" id="weekly"><p>Next</p><h2>Weekly results</h2><span>This will show the latest round, POTW and TOTW.</span></article>
+      <article class="panel" id="teams"><p>Teams</p><h2>Team standings</h2><span>Red, White, Blue and Black standings will appear here.</span></article>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
