@@ -1,14 +1,16 @@
-# FFL Stats Starter
+# FFL Stats — Live Google Sheet Build
 
-First-stage GitHub Pages build for the Friday Futsal League.
+This version loads live player stats from the published `Website Data` CSV in the Friday Futsal League 2026 Google Sheet.
 
-## Upload to GitHub
-1. Create a new repository, e.g. `ffl-stats`.
-2. Upload `index.html`, `style.css`, `data.js` and `script.js`.
-3. Go to Settings > Pages.
-4. Select Deploy from a branch.
-5. Choose `main` and `/(root)`.
-6. Save.
+## Upload/update GitHub
+Replace the existing files in the root of the `FFL-Stats` repository with:
+- `index.html`
+- `style.css`
+- `script.js`
 
-## Next step
-Replace the temporary `data.js` file with live data from the Google Sheet.
+You can delete the old `data.js` file because it is no longer used.
+
+GitHub Pages should then rebuild automatically from the `main` branch.
+
+## Data flow
+Friday Futsal League tab → Website Data tab → published CSV → GitHub Pages site.

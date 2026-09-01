@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Friday Futsal League 2026 player stats and leaderboard.">
   <title>FFL Player Stats</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -18,14 +19,15 @@
       <a href="#weekly">Weekly</a>
       <a href="#teams">Teams</a>
     </nav>
-    <div class="week">WEEK 31</div>
+    <div class="week">2026 SEASON</div>
   </header>
 
   <main>
     <section class="hero">
       <p>Season stats</p>
       <h1>FFL Player Stats</h1>
-      <span>Your league stats, built for players.</span>
+      <span>Live player stats from the Friday Futsal League.</span>
+      <div id="dataStatus" class="data-status">Loading live stats…</div>
     </section>
 
     <section class="cards">
@@ -39,25 +41,28 @@
     <section class="panel" id="leaderboard">
       <div class="panel-head">
         <div><p>Leaderboard</p><h2>Player standings</h2></div>
-        <input id="search" type="search" placeholder="Search player...">
+        <input id="search" type="search" placeholder="Search player..." autocomplete="off">
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Pos</th><th>Player</th><th>Wins</th><th>Draws</th><th>Pts</th><th>CS</th><th>Goals</th><th>Assists</th><th>TOTW</th><th>POTW</th><th>Y</th><th>R</th></tr>
+            <tr>
+              <th>Pos</th><th>Player</th><th>Apps</th><th>Pts</th><th>Wins</th><th>Draws</th><th>CS</th><th>Goals</th><th>Assists</th><th>TOTW</th><th>POTW</th>
+            </tr>
           </thead>
-          <tbody id="leaderboardBody"></tbody>
+          <tbody id="leaderboardBody">
+            <tr><td colspan="11">Loading live stats…</td></tr>
+          </tbody>
         </table>
       </div>
     </section>
 
     <section class="lower">
-      <article class="panel" id="weekly"><p>Next</p><h2>Weekly results</h2><span>This will show the latest round, POTW and TOTW.</span></article>
-      <article class="panel" id="teams"><p>Teams</p><h2>Team standings</h2><span>Red, White, Blue and Black standings will appear here.</span></article>
+      <article class="panel" id="weekly"><p>Next</p><h2>Weekly results</h2><span>Latest round, POTW and TOTW will be added here next.</span></article>
+      <article class="panel" id="teams"><p>Teams</p><h2>Team standings</h2><span>Red, White, Blue and Black standings will be added here next.</span></article>
     </section>
   </main>
 
-  <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
