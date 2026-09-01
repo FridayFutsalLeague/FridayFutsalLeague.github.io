@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Friday Futsal League 2026 player stats and leaderboard.">
   <title>FFL Player Stats</title>
-  <link rel="stylesheet" href="style.css?v=20260901-6">
+  <link rel="stylesheet" href="style.css?v=20260902-1">
 </head>
 <body>
   <header class="topbar">
@@ -33,11 +33,11 @@
     </section>
 
     <section class="cards">
-      <article><b>🏆</b><span>Points leader</span><strong id="pointsLeader">—</strong><em id="pointsLeaderValue">—</em></article>
-      <article><b>⚽</b><span>Top goal scorer</span><strong id="goalLeader">—</strong><em id="goalLeaderValue">—</em></article>
-      <article><b>🎯</b><span>Assist leader</span><strong id="assistLeader">—</strong><em id="assistLeaderValue">—</em></article>
-      <article><b>⭐</b><span>Most POTW</span><strong id="potwLeader">—</strong><em id="potwLeaderValue">—</em></article>
-      <article><b>☆</b><span>Most TOTW</span><strong id="totwLeader">—</strong><em id="totwLeaderValue">—</em></article>
+      <article><img class="stat-icon" src="assets/icons/points.png?v=20260902-1" alt="Points icon"><span>Points leader</span><strong id="pointsLeader">—</strong><em id="pointsLeaderValue">—</em></article>
+      <article><img class="stat-icon" src="assets/icons/goals.png?v=20260902-1" alt="Goals icon"><span>Top goal scorer</span><strong id="goalLeader">—</strong><em id="goalLeaderValue">—</em></article>
+      <article><img class="stat-icon" src="assets/icons/assists.png?v=20260902-1" alt="Assists icon"><span>Assist leader</span><strong id="assistLeader">—</strong><em id="assistLeaderValue">—</em></article>
+      <article><img class="stat-icon" src="assets/icons/potw.png?v=20260902-1" alt="POTW icon"><span>Most POTW</span><strong id="potwLeader">—</strong><em id="potwLeaderValue">—</em></article>
+      <article><img class="stat-icon" src="assets/icons/totw.png?v=20260902-1" alt="TOTW icon"><span>Most TOTW</span><strong id="totwLeader">—</strong><em id="totwLeaderValue">—</em></article>
     </section>
 
     <section class="panel" id="leaderboard">
@@ -60,10 +60,11 @@
     <section class="top-five-section" id="top-five">
       <div class="section-heading"><p>League leaders</p><h2>Top 5</h2></div>
       <div class="top-five-grid">
-        <article class="panel stat-list"><h3>⚽ Top 5 Goal Scorers</h3><ol id="topGoals"></ol></article>
-        <article class="panel stat-list"><h3>🎯 Top 5 Assists</h3><ol id="topAssists"></ol></article>
-        <article class="panel stat-list"><h3>☆ Top 5 TOTW</h3><ol id="topTotw"></ol></article>
-        <article class="panel stat-list"><h3>⭐ Top 5 POTW</h3><ol id="topPotw"></ol></article>
+        <article class="panel stat-list points-list"><h3><img src="assets/icons/points.png?v=20260902-1" alt=""> Top 5 Points</h3><ol id="topPoints"></ol></article>
+        <article class="panel stat-list goals-list"><h3><img src="assets/icons/goals.png?v=20260902-1" alt=""> Top 5 Goal Scorers</h3><ol id="topGoals"></ol></article>
+        <article class="panel stat-list assists-list"><h3><img src="assets/icons/assists.png?v=20260902-1" alt=""> Top 5 Assists</h3><ol id="topAssists"></ol></article>
+        <article class="panel stat-list totw-list"><h3><img src="assets/icons/totw.png?v=20260902-1" alt=""> Top 5 TOTW</h3><ol id="topTotw"></ol></article>
+        <article class="panel stat-list potw-list"><h3><img src="assets/icons/potw.png?v=20260902-1" alt=""> Top 5 POTW</h3><ol id="topPotw"></ol></article>
       </div>
     </section>
   </main>
@@ -72,6 +73,6 @@
     <img src="ffl-logo.png?v=20260901-6" alt="FFL logo">
     <div><strong>FFL</strong><span>Friday Futsal League</span></div>
   </footer>
-  <script src="script.js?v=20260901-6"></script>
+  <script src="script.js?v=20260902-1"></script>
 </body>
 </html>

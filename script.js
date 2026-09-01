@@ -145,6 +145,7 @@ function renderTopFive(listId, key) {
 }
 
 function renderTopFiveLists() {
+  renderTopFive("topPoints", "pts");
   renderTopFive("topGoals", "goals");
   renderTopFive("topAssists", "assists");
   renderTopFive("topTotw", "totw");
