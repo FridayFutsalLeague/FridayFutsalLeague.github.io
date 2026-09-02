@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Friday Futsal League 2026 player stats and leaderboard.">
   <title>FFL Player Stats</title>
-  <link rel="stylesheet" href="style.css?v=mobile5">
+  <link rel="stylesheet" href="style.css?v=profile1">
 </head>
 <body>
   <header class="topbar">
@@ -14,9 +14,9 @@
       <div><div class="brand">FFL</div><small>Friday Futsal League</small></div>
     </a>
     <nav>
-      <a class="active" href="#top">Home</a>
-      <a href="#leaderboard">Players</a>
-      <a href="#top-five">Top 5</a>
+      <a class="active" href="#leaderboard" data-view-link="leaderboard">Leaderboard</a>
+      <a href="#player-profile" data-view-link="profile">Player Profile</a>
+      <a href="#top-five" data-view-link="topfive">Top 5</a>
     </nav>
     <div class="week">2026 SEASON</div>
   </header>
@@ -32,6 +32,12 @@
       </div>
     </section>
 
+    <div class="view-tabs" role="tablist" aria-label="FFL pages">
+      <button id="leaderboardTab" class="view-tab active" type="button" role="tab" aria-selected="true">Leaderboard</button>
+      <button id="profileTab" class="view-tab" type="button" role="tab" aria-selected="false">Player Profile</button>
+    </div>
+
+    <div id="leaderboardView" class="site-view active-view">
     <section class="cards">
       <article><img class="stat-icon" src="assets/icons/points.png?v=20260902-1" alt="Points icon"><span>Points leader</span><strong id="pointsLeader">—</strong><em id="pointsLeaderValue">—</em></article>
       <article><img class="stat-icon" src="assets/icons/goals.png?v=20260902-1" alt="Goals icon"><span>Top goal scorer</span><strong id="goalLeader">—</strong><em id="goalLeaderValue">—</em></article>
@@ -68,12 +74,66 @@
         <article class="panel stat-list potw-list"><h3><img src="assets/icons/potw.png?v=20260902-1" alt=""> Top 5 POTW</h3><ol id="topPotw"></ol></article>
       </div>
     </section>
+    </div>
+
+    <section id="profileView" class="site-view profile-view" aria-labelledby="profileTab" hidden>
+      <div class="profile-toolbar panel">
+        <div>
+          <p>Player profile</p>
+          <h2>Choose your player</h2>
+        </div>
+        <label class="player-picker">
+          <span>Player</span>
+          <select id="playerSelect" aria-label="Choose a player">
+            <option value="">Loading players…</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-photo-panel">
+          <div class="profile-photo-frame">
+            <img id="profilePhoto" alt="" hidden>
+            <div id="profilePhotoFallback" class="profile-photo-fallback" aria-hidden="true">FFL</div>
+          </div>
+        </div>
+
+        <div class="profile-content">
+          <div class="profile-heading">
+            <p>FFL 2026 player</p>
+            <h2 id="profileName">Select a player</h2>
+            <div class="profile-meta">
+              <span id="profileRank" class="rank-pill">League rank —</span>
+              <span id="profileAppsMeta">— appearances</span>
+            </div>
+          </div>
+
+          <div class="profile-primary-stats">
+            <article><img src="assets/icons/points.png" alt=""><span>Points</span><strong id="profilePts">—</strong></article>
+            <article><img src="assets/icons/goals.png" alt=""><span>Goals</span><strong id="profileGoals">—</strong></article>
+            <article><img src="assets/icons/assists.png" alt=""><span>Assists</span><strong id="profileAssists">—</strong></article>
+            <article><img src="assets/icons/totw.png" alt=""><span>TOTW</span><strong id="profileTotw">—</strong></article>
+            <article><img src="assets/icons/potw.png" alt=""><span>POTW</span><strong id="profilePotw">—</strong></article>
+          </div>
+
+          <div class="profile-detail-grid">
+            <article><span>Apps</span><strong id="profileApps">—</strong></article>
+            <article><span>Goal / App</span><strong id="profileGoalApp">—</strong></article>
+            <article><span>Assist / App</span><strong id="profileAssistApp">—</strong></article>
+            <article><span>Goal Involvement</span><strong id="profileGI">—</strong></article>
+            <article><span>Points / App</span><strong id="profilePointsApp">—</strong></article>
+            <article><span>Wins / App</span><strong id="profileWinsApp">—</strong></article>
+          </div>
+        </div>
+      </div>
+      <div id="profilePhotoNote" class="profile-photo-note" hidden>Player photo not found. Check the filename in assets/players.</div>
+    </section>
   </main>
 
   <footer>
     <img src="ffl-logo.png?v=20260901-6" alt="FFL logo">
     <div><strong>FFL</strong><span>Friday Futsal League</span></div>
   </footer>
-  <script src="script.js?v=mobile5"></script>
+  <script src="script.js?v=profile1"></script>
 </body>
 </html>

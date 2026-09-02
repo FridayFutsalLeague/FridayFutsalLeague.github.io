@@ -161,6 +161,152 @@ function escapeHTML(value) {
     .replaceAll("'", "&#039;");
 }
 
+
+const leaderboardTab = document.getElementById("leaderboardTab");
+const profileTab = document.getElementById("profileTab");
+const leaderboardView = document.getElementById("leaderboardView");
+const profileView = document.getElementById("profileView");
+const playerSelect = document.getElementById("playerSelect");
+const profilePhoto = document.getElementById("profilePhoto");
+const profilePhotoFallback = document.getElementById("profilePhotoFallback");
+const profilePhotoNote = document.getElementById("profilePhotoNote");
+
+function setView(view) {
+  const showProfile = view === "profile";
+  leaderboardView.hidden = showProfile;
+  profileView.hidden = !showProfile;
+  leaderboardView.classList.toggle("active-view", !showProfile);
+  profileView.classList.toggle("active-view", showProfile);
+
+  leaderboardTab.classList.toggle("active", !showProfile);
+  profileTab.classList.toggle("active", showProfile);
+  leaderboardTab.setAttribute("aria-selected", String(!showProfile));
+  profileTab.setAttribute("aria-selected", String(showProfile));
+
+  document.querySelectorAll("[data-view-link]").forEach(link => {
+    link.classList.toggle("active", link.dataset.viewLink === (showProfile ? "profile" : "leaderboard"));
+  });
+
+  if (showProfile) {
+    if (!playerSelect.value && players.length) {
+      playerSelect.value = rankedPlayers()[0]?.player || players[0].player;
+    }
+    renderProfile(playerSelect.value);
+    history.replaceState(null, "", "#player-profile");
+  } else {
+    history.replaceState(null, "", "#leaderboard");
+  }
+}
+
+function populatePlayerSelect() {
+  const selected = playerSelect.value;
+  const sorted = [...players].sort((a, b) => a.player.localeCompare(b.player));
+  playerSelect.innerHTML = sorted.map(p =>
+    `<option value="${escapeHTML(p.player)}">${escapeHTML(p.player)}</option>`
+  ).join("");
+
+  const defaultName = sorted.some(p => p.player === selected)
+    ? selected
+    : (rankedPlayers()[0]?.player || sorted[0]?.player || "");
+
+  playerSelect.value = defaultName;
+  renderProfile(defaultName);
+}
+
+function photoCandidates(playerName) {
+  const rawNames = [
+    playerName,
+    playerName.replace(/\s+/g, "_"),
+    playerName.replace(/\s+/g, "-")
+  ];
+  const names = [...new Set(rawNames)];
+  const folders = ["assets/players", "assets/icons/players"];
+  const exts = ["png", "jpg", "jpeg", "webp"];
+  const urls = [];
+
+  for (const folder of folders) {
+    for (const name of names) {
+      for (const ext of exts) {
+        urls.push(`${folder}/${encodeURIComponent(name)}.${ext}`);
+      }
+    }
+  }
+  return urls;
+}
+
+function loadProfilePhoto(playerName) {
+  const candidates = photoCandidates(playerName);
+  let index = 0;
+
+  profilePhoto.hidden = true;
+  profilePhoto.removeAttribute("src");
+  profilePhotoFallback.hidden = false;
+  profilePhotoFallback.textContent = playerName
+    ? playerName.split(/\s+/).map(part => part[0]).join("").slice(0, 3).toUpperCase()
+    : "FFL";
+  profilePhotoNote.hidden = true;
+
+  const tryNext = () => {
+    if (index >= candidates.length) {
+      profilePhoto.hidden = true;
+      profilePhotoFallback.hidden = false;
+      profilePhotoNote.hidden = false;
+      return;
+    }
+    profilePhoto.src = candidates[index++];
+  };
+
+  profilePhoto.onload = () => {
+    profilePhoto.hidden = false;
+    profilePhotoFallback.hidden = true;
+    profilePhotoNote.hidden = true;
+  };
+  profilePhoto.onerror = tryNext;
+  tryNext();
+}
+
+function renderProfile(playerName) {
+  if (!players.length || !playerName) return;
+  const p = players.find(player => player.player === playerName);
+  if (!p) return;
+
+  const ranking = rankedPlayers();
+  const rank = ranking.findIndex(player => player.player === p.player) + 1;
+
+  document.getElementById("profileName").textContent = p.player;
+  document.getElementById("profileRank").textContent = rank > 0 ? `League rank #${rank}` : "League rank —";
+  document.getElementById("profileAppsMeta").textContent = `${p.apps} appearance${p.apps === 1 ? "" : "s"}`;
+
+  document.getElementById("profilePts").textContent = p.pts;
+  document.getElementById("profileGoals").textContent = p.goals;
+  document.getElementById("profileAssists").textContent = p.assists;
+  document.getElementById("profileTotw").textContent = p.totw;
+  document.getElementById("profilePotw").textContent = p.potw;
+  document.getElementById("profileApps").textContent = p.apps;
+  document.getElementById("profileGoalApp").textContent = formatValue(p.goalsPerApp, "goalsPerApp");
+  document.getElementById("profileAssistApp").textContent = formatValue(p.assistsPerApp, "assistsPerApp");
+  document.getElementById("profileGI").textContent = formatValue(p.goalInvolvementPerApp, "goalInvolvementPerApp");
+  document.getElementById("profilePointsApp").textContent = Number(p.pointsPerApp).toFixed(2);
+  document.getElementById("profileWinsApp").textContent = Number(p.winsPerApp).toFixed(2);
+
+  loadProfilePhoto(p.player);
+}
+
+leaderboardTab.addEventListener("click", () => setView("leaderboard"));
+profileTab.addEventListener("click", () => setView("profile"));
+playerSelect.addEventListener("change", event => renderProfile(event.target.value));
+
+document.querySelectorAll("[data-view-link]").forEach(link => {
+  link.addEventListener("click", event => {
+    const target = link.dataset.viewLink;
+    if (target === "profile" || target === "leaderboard") {
+      event.preventDefault();
+      setView(target);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+});
+
 async function loadLiveStats() {
   try {
     const response = await fetch(CSV_URL, { cache: "no-store" });
@@ -180,6 +326,8 @@ async function loadLiveStats() {
     renderCards();
     renderTopFiveLists();
     render(searchEl.value);
+    populatePlayerSelect();
+    if (location.hash === "#player-profile") setView("profile");
     statusEl.textContent = `Live data connected • ${players.length} players`;
     statusEl.classList.add("connected");
   } catch (error) {
