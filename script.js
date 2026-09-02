@@ -1,3 +1,4 @@
+const HOME_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRUVI1ApUTfIJgRT_itgwKts9UySXToy3pMMwSfxg131Ndkgx10AISs3AkluYz0EO1Xe46SnEbyaUGM/pub?gid=735900231&single=true&output=csv";
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRUVI1ApUTfIJgRT_itgwKts9UySXToy3pMMwSfxg131Ndkgx10AISs3AkluYz0EO1Xe46SnEbyaUGM/pub?gid=623646539&single=true&output=csv";
 
 let players = [];
@@ -162,8 +163,10 @@ function escapeHTML(value) {
 }
 
 
+const homeTab = document.getElementById("homeTab");
 const leaderboardTab = document.getElementById("leaderboardTab");
 const profileTab = document.getElementById("profileTab");
+const homeView = document.getElementById("homeView");
 const leaderboardView = document.getElementById("leaderboardView");
 const profileView = document.getElementById("profileView");
 const playerSelect = document.getElementById("playerSelect");
@@ -172,29 +175,38 @@ const profilePhotoFallback = document.getElementById("profilePhotoFallback");
 const profilePhotoNote = document.getElementById("profilePhotoNote");
 
 function setView(view) {
-  const showProfile = view === "profile";
-  leaderboardView.hidden = showProfile;
-  profileView.hidden = !showProfile;
-  leaderboardView.classList.toggle("active-view", !showProfile);
-  profileView.classList.toggle("active-view", showProfile);
+  const valid = ["home", "leaderboard", "profile"];
+  if (!valid.includes(view)) view = "home";
 
-  leaderboardTab.classList.toggle("active", !showProfile);
-  profileTab.classList.toggle("active", showProfile);
-  leaderboardTab.setAttribute("aria-selected", String(!showProfile));
-  profileTab.setAttribute("aria-selected", String(showProfile));
+  homeView.hidden = view !== "home";
+  leaderboardView.hidden = view !== "leaderboard";
+  profileView.hidden = view !== "profile";
 
-  document.querySelectorAll("[data-view-link]").forEach(link => {
-    link.classList.toggle("active", link.dataset.viewLink === (showProfile ? "profile" : "leaderboard"));
+  homeView.classList.toggle("active-view", view === "home");
+  leaderboardView.classList.toggle("active-view", view === "leaderboard");
+  profileView.classList.toggle("active-view", view === "profile");
+
+  [homeTab, leaderboardTab, profileTab].forEach(tab => {
+    const tabView = tab === homeTab ? "home" : tab === leaderboardTab ? "leaderboard" : "profile";
+    const active = tabView === view;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-selected", String(active));
   });
 
-  if (showProfile) {
+  document.querySelectorAll("[data-view-link]").forEach(link => {
+    link.classList.toggle("active", link.dataset.viewLink === view);
+  });
+
+  if (view === "profile") {
     if (!playerSelect.value && players.length) {
       playerSelect.value = rankedPlayers()[0]?.player || players[0].player;
     }
     renderProfile(playerSelect.value);
     history.replaceState(null, "", "#player-profile");
-  } else {
+  } else if (view === "leaderboard") {
     history.replaceState(null, "", "#leaderboard");
+  } else {
+    history.replaceState(null, "", "#home");
   }
 }
 
@@ -321,6 +333,7 @@ function renderProfile(playerName) {
   loadProfilePhoto(p.player);
 }
 
+homeTab.addEventListener("click", () => setView("home"));
 leaderboardTab.addEventListener("click", () => setView("leaderboard"));
 profileTab.addEventListener("click", () => setView("profile"));
 playerSelect.addEventListener("change", event => renderProfile(event.target.value));
@@ -328,7 +341,7 @@ playerSelect.addEventListener("change", event => renderProfile(event.target.valu
 document.querySelectorAll("[data-view-link]").forEach(link => {
   link.addEventListener("click", event => {
     const target = link.dataset.viewLink;
-    if (target === "profile" || target === "leaderboard") {
+    if (["home", "leaderboard", "profile"].includes(target)) {
       event.preventDefault();
       setView(target);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -357,6 +370,8 @@ async function loadLiveStats() {
     render(searchEl.value);
     populatePlayerSelect();
     if (location.hash === "#player-profile") setView("profile");
+    else if (location.hash === "#leaderboard") setView("leaderboard");
+    else setView("home");
     statusEl.textContent = `Live data connected • ${players.length} players`;
     statusEl.classList.add("connected");
   } catch (error) {
@@ -367,5 +382,86 @@ async function loadLiveStats() {
   }
 }
 
+
+function homeRowsToMap(rows) {
+  const data = {};
+  rows.slice(1).forEach(row => {
+    const key = String(row[0] || "").trim();
+    if (key) data[key] = String(row[1] || "").trim();
+  });
+  return data;
+}
+
+function loadImageWithFallback(img, fallback, src) {
+  img.hidden = true;
+  fallback.hidden = false;
+  if (!src) return;
+  img.onload = () => { img.hidden = false; fallback.hidden = true; };
+  img.onerror = () => { img.hidden = true; fallback.hidden = false; };
+  img.src = src;
+}
+
+function renderHome(data) {
+  const folder = data["Weekly Folder"] || "assets/weekly/";
+  const cleanFolder = folder.endsWith("/") ? folder : `${folder}/`;
+
+  document.getElementById("homeWeek").textContent = data["Current Week"] || "Latest Week";
+  document.getElementById("homeDate").textContent = data["Date"] || "—";
+  document.getElementById("redScore").textContent = data["Red Score"] || "—";
+  document.getElementById("blueScore").textContent = data["Blue Score"] || "—";
+  document.getElementById("whiteScore").textContent = data["White Score"] || "—";
+  document.getElementById("blackScore").textContent = data["Black Score"] || "—";
+  document.getElementById("homePotwName").textContent = data["POTW Player"] || "POTW";
+
+  loadImageWithFallback(
+    document.getElementById("homePotwImage"),
+    document.getElementById("homePotwFallback"),
+    data["POTW Image"] ? cleanFolder + encodeURIComponent(data["POTW Image"]).replaceAll("%2F","/") : ""
+  );
+  loadImageWithFallback(
+    document.getElementById("homeTotwImage"),
+    document.getElementById("homeTotwFallback"),
+    data["TOTW Image"] ? cleanFolder + encodeURIComponent(data["TOTW Image"]).replaceAll("%2F","/") : ""
+  );
+
+  const stories = [1,2].map(i => ({
+    title: data[`News ${i} Title`] || "",
+    summary: data[`News ${i} Summary`] || "",
+    image: data[`News ${i} Image`] || ""
+  })).filter(story => story.title || story.summary);
+
+  const newsGrid = document.getElementById("homeNewsGrid");
+  if (!stories.length) {
+    newsGrid.innerHTML = `<article class="news-card panel news-placeholder"><div><span>FFL News</span><h3>Add your first weekly story</h3><p>Enter a headline and summary in the Home Page Data tab.</p></div></article>`;
+  } else {
+    newsGrid.innerHTML = stories.map((story, index) => {
+      const image = story.image ? `${cleanFolder}${encodeURIComponent(story.image).replaceAll("%2F","/")}` : "";
+      return `<article class="news-card panel">
+        <div class="news-image">${image ? `<img src="${image}" alt="" onerror="this.parentElement.classList.add('no-image');this.remove()">` : ""}</div>
+        <div class="news-copy"><span>FFL News ${String(index+1).padStart(2,"0")}</span><h3>${escapeHTML(story.title || "Latest FFL story")}</h3><p>${escapeHTML(story.summary || "")}</p></div>
+      </article>`;
+    }).join("");
+  }
+}
+
+async function loadHomeData() {
+  const status = document.getElementById("homeStatus");
+  try {
+    const response = await fetch(HOME_CSV_URL, { cache: "no-store" });
+    if (!response.ok) throw new Error(`Home data returned ${response.status}`);
+    const rows = parseCSV(await response.text());
+    const data = homeRowsToMap(rows);
+    renderHome(data);
+    status.textContent = "Home page connected";
+    status.classList.add("connected");
+  } catch (error) {
+    console.error("FFL home load failed:", error);
+    status.textContent = "Publish the Home Page Data tab to connect";
+    status.classList.add("error");
+  }
+}
+
+
 searchEl.addEventListener("input", event => render(event.target.value));
 loadLiveStats();
+loadHomeData();

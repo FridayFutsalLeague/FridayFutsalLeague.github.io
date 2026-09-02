@@ -433,3 +433,80 @@ footer img{width:48px!important;height:56px!important;max-width:48px!important;o
   color: #54d9e8;
   background: #1597a512;
 }
+
+
+/* ===== FFL HOME PAGE ===== */
+.home-view{display:block}
+.home-week-head{
+  display:flex;justify-content:space-between;align-items:end;gap:20px;margin:4px 0 16px
+}
+.home-week-head p,.home-section-title p{
+  margin:0 0 4px;color:var(--accent);text-transform:uppercase;
+  font-size:10px;font-weight:900;letter-spacing:.12em
+}
+.home-week-head h2,.home-section-title h2{margin:0}
+.home-week-head span{display:block;color:var(--muted);margin-top:5px;font-size:12px}
+.home-status{font-size:11px;color:var(--muted);font-weight:800}
+.home-status.connected{color:#8ce99a}.home-status.error{color:#ff9b95}
+
+.home-results{margin-bottom:16px}
+.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.score-card{
+  position:relative;overflow:hidden;min-height:150px;padding:18px;
+  border:1px solid #2a3036;border-radius:12px;background:#0a0d10;
+  display:grid;grid-template-columns:auto 1fr;grid-template-rows:1fr auto;gap:6px 14px;align-items:center
+}
+.score-card:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:#666}
+.team-red:before{background:#ff3038}.team-blue:before{background:#3278ff}
+.team-white:before{background:#e8eaed}.team-black:before{background:#4a4f55}
+.team-badge-wrap{
+  grid-row:1/3;width:72px;height:72px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:#ffffff07;border:1px solid #ffffff12
+}
+.team-badge-wrap img{width:60px;height:60px;object-fit:contain}
+.team-fallback{font-size:26px;font-weight:950}
+.score-card>span{align-self:end;color:var(--muted);text-transform:uppercase;font-size:10px;font-weight:900;letter-spacing:.08em}
+.score-card strong{font-size:42px;line-height:1;align-self:start}
+
+.weekly-awards-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.weekly-feature{padding:18px;min-width:0}
+.weekly-image-frame{
+  margin-top:14px;min-height:360px;border-radius:12px;overflow:hidden;
+  background:linear-gradient(145deg,#151a1f,#080a0d);
+  border:1px solid #242b31;display:flex;align-items:center;justify-content:center
+}
+.weekly-image-frame img{width:100%;height:100%;max-height:500px;object-fit:contain}
+.weekly-image-fallback{
+  padding:30px;text-align:center;color:var(--muted);font-size:12px;font-weight:800
+}
+
+.home-news-section{margin-top:8px}
+.home-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px}
+.news-card{padding:0;overflow:hidden;min-width:0}
+.news-image{height:190px;background:linear-gradient(135deg,#171d22,#0a0d10)}
+.news-image img{width:100%;height:100%;object-fit:cover}
+.news-image.no-image{display:none}
+.news-copy{padding:18px}
+.news-copy span{font-size:9px;color:var(--accent);font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.news-copy h3{font-size:20px;line-height:1.12;margin:8px 0 10px}
+.news-copy p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}
+.news-placeholder{grid-column:1/-1;min-height:180px;display:flex;align-items:center}
+
+@media(max-width:900px){
+  .score-grid{grid-template-columns:repeat(2,1fr)}
+  .home-news-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .home-week-head{align-items:flex-start;flex-direction:column;gap:8px}
+  .score-grid{grid-template-columns:1fr 1fr;gap:9px}
+  .score-card{min-height:118px;padding:12px;grid-template-columns:auto 1fr;gap:4px 10px}
+  .team-badge-wrap{width:52px;height:52px}.team-badge-wrap img{width:44px;height:44px}
+  .score-card strong{font-size:30px}
+  .weekly-awards-grid{grid-template-columns:1fr;gap:12px}
+  .weekly-feature{padding:12px}
+  .weekly-image-frame{min-height:260px}
+  .home-news-grid{grid-template-columns:1fr}
+  .news-image{height:210px}
+  .view-tabs{overflow-x:auto;white-space:nowrap}
+  .view-tab{flex:0 0 auto}
+}
