@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Friday Futsal League 2026 player stats and leaderboard.">
   <title>FFL Player Stats</title>
-  <link rel="stylesheet" href="style.css?v=homefix20260903">
+  <link rel="stylesheet" href="style.css?v=wd1">
 </head>
 <body>
   <header class="topbar">
@@ -56,19 +56,39 @@
         <div class="score-grid">
           <article class="score-card team-red">
             <div class="team-badge-wrap"><img src="assets/teams/red.png" alt="" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="team-fallback" hidden>R</span></div>
-            <span>Red</span><strong id="redScore">—</strong>
+            <span>Red</span>
+            <div class="team-record">
+              <div><strong id="redScore">—</strong><small>W</small></div>
+              <i>/</i>
+              <div><strong id="redDraws">—</strong><small>D</small></div>
+            </div>
           </article>
           <article class="score-card team-blue">
             <div class="team-badge-wrap"><img src="assets/teams/blue.png" alt="" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="team-fallback" hidden>B</span></div>
-            <span>Blue</span><strong id="blueScore">—</strong>
+            <span>Blue</span>
+            <div class="team-record">
+              <div><strong id="blueScore">—</strong><small>W</small></div>
+              <i>/</i>
+              <div><strong id="blueDraws">—</strong><small>D</small></div>
+            </div>
           </article>
           <article class="score-card team-white">
             <div class="team-badge-wrap"><img src="assets/teams/white.png" alt="" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="team-fallback" hidden>W</span></div>
-            <span>White</span><strong id="whiteScore">—</strong>
+            <span>White</span>
+            <div class="team-record">
+              <div><strong id="whiteScore">—</strong><small>W</small></div>
+              <i>/</i>
+              <div><strong id="whiteDraws">—</strong><small>D</small></div>
+            </div>
           </article>
           <article class="score-card team-black">
             <div class="team-badge-wrap"><img src="assets/teams/black.png" alt="" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="team-fallback" hidden>B</span></div>
-            <span>Black</span><strong id="blackScore">—</strong>
+            <span>Black</span>
+            <div class="team-record">
+              <div><strong id="blackScore">—</strong><small>W</small></div>
+              <i>/</i>
+              <div><strong id="blackDraws">—</strong><small>D</small></div>
+            </div>
           </article>
         </div>
       </section>
@@ -207,6 +227,6 @@
     <img src="ffl-logo.png?v=20260901-6" alt="FFL logo">
     <div><strong>FFL</strong><span>Friday Futsal League</span></div>
   </footer>
-  <script src="script.js?v=homefix20260903"></script>
+  <script src="script.js?v=wd2"></script>
 </body>
 </html>

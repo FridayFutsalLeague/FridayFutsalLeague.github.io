@@ -510,3 +510,16 @@ footer img{width:48px!important;height:56px!important;max-width:48px!important;o
   .view-tabs{overflow-x:auto;white-space:nowrap}
   .view-tab{flex:0 0 auto}
 }
+
+/* Weekly team W / D records */
+.team-record{display:flex;align-items:flex-end;gap:8px;align-self:start}
+.team-record>div{display:flex;align-items:flex-end;gap:3px}
+.team-record strong{font-size:34px;line-height:1;font-weight:950}
+.team-record small{font-size:10px;line-height:1.2;color:var(--muted);font-weight:900;margin-bottom:3px}
+.team-record i{font-style:normal;color:#555;font-size:20px;line-height:1;margin-bottom:2px}
+@media(max-width:720px){
+  .team-record{gap:5px}
+  .team-record strong{font-size:26px}
+  .team-record small{font-size:9px}
+  .team-record i{font-size:16px}
+}

@@ -407,10 +407,14 @@ function renderHome(data) {
 
   document.getElementById("homeWeek").textContent = data["Current Week"] || "Latest Week";
   document.getElementById("homeDate").textContent = data["Date"] || "—";
-  document.getElementById("redScore").textContent = data["Red Score"] || "—";
-  document.getElementById("blueScore").textContent = data["Blue Score"] || "—";
-  document.getElementById("whiteScore").textContent = data["White Score"] || "—";
-  document.getElementById("blackScore").textContent = data["Black Score"] || "—";
+  document.getElementById("redScore").textContent = data["Red Wins"] || "—";
+  document.getElementById("blueScore").textContent = data["Blue Wins"] || "—";
+  document.getElementById("whiteScore").textContent = data["White Wins"] || "—";
+  document.getElementById("blackScore").textContent = data["Black Wins"] || "—";
+  document.getElementById("redDraws").textContent = data["Red Draws"] || "—";
+  document.getElementById("blueDraws").textContent = data["Blue Draws"] || "—";
+  document.getElementById("whiteDraws").textContent = data["White Draws"] || "—";
+  document.getElementById("blackDraws").textContent = data["Black Draws"] || "—";
   document.getElementById("homePotwName").textContent = data["POTW Player"] || "POTW";
 
   loadImageWithFallback(
