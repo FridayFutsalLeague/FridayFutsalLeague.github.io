@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Friday Futsal League 2026 player stats and leaderboard.">
   <title>FFL Player Stats</title>
-  <link rel="stylesheet" href="style.css?v=profile3">
+  <link rel="stylesheet" href="style.css?v=homefix20260903">
 </head>
 <body>
   <header class="topbar">
@@ -14,9 +14,9 @@
       <div><div class="brand">FFL</div><small>Friday Futsal League</small></div>
     </a>
     <nav>
-      <a class="active" href="#leaderboard" data-view-link="leaderboard">Leaderboard</a>
+      <a class="active" href="#home" data-view-link="home">Home</a>
+      <a href="#leaderboard" data-view-link="leaderboard">Leaderboard</a>
       <a href="#player-profile" data-view-link="profile">Player Profile</a>
-      <a href="#top-five" data-view-link="topfive">Top 5</a>
     </nav>
     <div class="week">2026 SEASON</div>
   </header>
@@ -25,19 +25,92 @@
     <section class="hero">
       <img class="hero-logo" src="ffl-logo.png?v=20260901-6" alt="Friday Futsal League crest">
       <div>
-        <p>Season stats</p>
-        <h1>FFL Player Stats</h1>
-        <span>Live player stats from the Friday Futsal League.</span>
+        <p>Friday Futsal League</p>
+        <h1>FFL 2026</h1>
+        <span>Results, awards, stories and live league stats.</span>
         <div id="dataStatus" class="data-status">Loading live stats…</div>
       </div>
     </section>
 
     <div class="view-tabs" role="tablist" aria-label="FFL pages">
-      <button id="leaderboardTab" class="view-tab active" type="button" role="tab" aria-selected="true">Leaderboard</button>
+      <button id="homeTab" class="view-tab active" type="button" role="tab" aria-selected="true">Home</button>
+      <button id="leaderboardTab" class="view-tab" type="button" role="tab" aria-selected="false">Leaderboard</button>
       <button id="profileTab" class="view-tab" type="button" role="tab" aria-selected="false">Player Profile</button>
     </div>
 
-    <div id="leaderboardView" class="site-view active-view">
+    <section id="homeView" class="site-view home-view active-view" aria-labelledby="homeTab">
+      <div class="home-week-head">
+        <div>
+          <p>Latest round</p>
+          <h2 id="homeWeek">Latest Week</h2>
+          <span id="homeDate">—</span>
+        </div>
+        <div id="homeStatus" class="home-status">Loading home page…</div>
+      </div>
+
+      <section class="home-results panel">
+        <div class="home-section-title">
+          <p>Weekly results</p>
+          <h2>Latest scores</h2>
+        </div>
+        <div class="score-grid">
+          <article class="score-card team-red">
+            <div class="team-badge-wrap"><img src="assets/teams/red.png" alt="" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="team-fallback" hidden>R</span></div>
+            <span>Red</span><strong id="redScore">—</strong>
+          </article>
+          <article class="score-card team-blue">
+            <div class="team-badge-wrap"><img src="assets/teams/blue.png" alt="" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="team-fallback" hidden>B</span></div>
+            <span>Blue</span><strong id="blueScore">—</strong>
+          </article>
+          <article class="score-card team-white">
+            <div class="team-badge-wrap"><img src="assets/teams/white.png" alt="" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="team-fallback" hidden>W</span></div>
+            <span>White</span><strong id="whiteScore">—</strong>
+          </article>
+          <article class="score-card team-black">
+            <div class="team-badge-wrap"><img src="assets/teams/black.png" alt="" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="team-fallback" hidden>B</span></div>
+            <span>Black</span><strong id="blackScore">—</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="weekly-awards-grid">
+        <article class="weekly-feature panel">
+          <div class="home-section-title">
+            <p>Player of the Week</p>
+            <h2 id="homePotwName">POTW</h2>
+          </div>
+          <div class="weekly-image-frame potw-frame">
+            <img id="homePotwImage" alt="Player of the Week artwork" hidden>
+            <div id="homePotwFallback" class="weekly-image-fallback">Upload this week's POTW card</div>
+          </div>
+        </article>
+
+        <article class="weekly-feature panel">
+          <div class="home-section-title">
+            <p>Team of the Week</p>
+            <h2>TOTW</h2>
+          </div>
+          <div class="weekly-image-frame">
+            <img id="homeTotwImage" alt="Team of the Week artwork" hidden>
+            <div id="homeTotwFallback" class="weekly-image-fallback">Upload this week's TOTW image</div>
+          </div>
+        </article>
+      </section>
+
+      <section class="home-news-section">
+        <div class="home-section-title">
+          <p>Around the league</p>
+          <h2>Latest news</h2>
+        </div>
+        <div id="homeNewsGrid" class="home-news-grid">
+          <article class="news-card panel news-placeholder">
+            <div><span>FFL News</span><h3>Add your first weekly story in Google Sheets</h3><p>The homepage will update automatically once a headline and summary are entered.</p></div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <div id="leaderboardView" class="site-view" hidden>
     <section class="cards">
       <article><img class="stat-icon" src="assets/icons/points.png?v=20260902-1" alt="Points icon"><span>Points leader</span><strong id="pointsLeader">—</strong><em id="pointsLeaderValue">—</em></article>
       <article><img class="stat-icon" src="assets/icons/goals.png?v=20260902-1" alt="Goals icon"><span>Top goal scorer</span><strong id="goalLeader">—</strong><em id="goalLeaderValue">—</em></article>
@@ -134,6 +207,6 @@
     <img src="ffl-logo.png?v=20260901-6" alt="FFL logo">
     <div><strong>FFL</strong><span>Friday Futsal League</span></div>
   </footer>
-  <script src="script.js?v=profile3"></script>
+  <script src="script.js?v=homefix20260903"></script>
 </body>
 </html>

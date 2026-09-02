@@ -351,7 +351,7 @@ document.querySelectorAll("[data-view-link]").forEach(link => {
 
 async function loadLiveStats() {
   try {
-    const response = await fetch(CSV_URL, { cache: "no-store" });
+    const response = await fetch(CSV_URL, { cache: "no-store", signal: AbortSignal.timeout(12000) });
     if (!response.ok) throw new Error(`Google Sheets returned ${response.status}`);
 
     const text = await response.text();
@@ -447,7 +447,7 @@ function renderHome(data) {
 async function loadHomeData() {
   const status = document.getElementById("homeStatus");
   try {
-    const response = await fetch(HOME_CSV_URL, { cache: "no-store" });
+    const response = await fetch(HOME_CSV_URL, { cache: "no-store", signal: AbortSignal.timeout(12000) });
     if (!response.ok) throw new Error(`Home data returned ${response.status}`);
     const rows = parseCSV(await response.text());
     const data = homeRowsToMap(rows);
@@ -463,5 +463,6 @@ async function loadHomeData() {
 
 
 searchEl.addEventListener("input", event => render(event.target.value));
+setView("home");
 loadLiveStats();
 loadHomeData();
