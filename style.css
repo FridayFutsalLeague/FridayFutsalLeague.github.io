@@ -331,3 +331,105 @@ footer img{width:48px!important;height:56px!important;max-width:48px!important;o
   .profile-detail-grid article{padding:14px 12px}
   .profile-detail-grid strong{font-size:18px}
 }
+
+
+/* ===== PROFILE BADGES + FALLBACK FIX ===== */
+
+/* Author CSS was overriding the browser's native [hidden] rule */
+.profile-photo-fallback[hidden],
+.profile-photo-frame img[hidden] {
+  display: none !important;
+}
+
+.profile-meta {
+  align-items: center;
+}
+
+.profile-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.achievement-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid #3d4650;
+  background: #ffffff08;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badge-points {
+  border-color: #d5d7da;
+  background: #ffffff10;
+}
+
+.badge-goals {
+  border-color: #d82d35;
+  color: #ff5960;
+  background: #d82d3512;
+}
+
+.badge-assists {
+  border-color: #2e74e7;
+  color: #64a0ff;
+  background: #2e74e712;
+}
+
+.badge-potw {
+  border-color: #d7a51f;
+  color: #f2c444;
+  background: #d7a51f12;
+}
+
+.badge-totw {
+  border-color: #8d969f;
+  color: #e4e8eb;
+  background: #ffffff0b;
+}
+
+@media(max-width:720px){
+  .profile-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .profile-badges {
+    width: 100%;
+  }
+
+  .achievement-pill {
+    min-height: 30px;
+    padding: 0 10px;
+    font-size: 9px;
+  }
+}
+
+
+/* ===== EXTRA PROFILE PERFORMANCE BADGES ===== */
+.badge-goals-app {
+  border-color: #7e57c2;
+  color: #b79cff;
+  background: #7e57c212;
+}
+
+.badge-assists-app {
+  border-color: #d97706;
+  color: #ff9d3f;
+  background: #d9770612;
+}
+
+.badge-gi-app {
+  border-color: #1597a5;
+  color: #54d9e8;
+  background: #1597a512;
+}

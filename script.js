@@ -265,6 +265,35 @@ function loadProfilePhoto(playerName) {
   tryNext();
 }
 
+
+function renderProfileBadges(p) {
+  const badgeWrap = document.getElementById("profileBadges");
+  if (!badgeWrap || !players.length) return;
+
+  const maxPts = Math.max(...players.map(x => x.pts));
+  const maxGoals = Math.max(...players.map(x => x.goals));
+  const maxAssists = Math.max(...players.map(x => x.assists));
+  const maxTotw = Math.max(...players.map(x => x.totw));
+  const maxPotw = Math.max(...players.map(x => x.potw));
+  const maxGoalsPerApp = Math.max(...players.map(x => Number(x.goalsPerApp) || 0));
+  const maxAssistsPerApp = Math.max(...players.map(x => Number(x.assistsPerApp) || 0));
+  const maxGoalInvolvementPerApp = Math.max(...players.map(x => Number(x.goalInvolvementPerApp) || 0));
+
+  const badges = [];
+  if (p.pts === maxPts && maxPts > 0) badges.push({ label: "Points Leader", cls: "badge-points" });
+  if (p.goals === maxGoals && maxGoals > 0) badges.push({ label: "Top Goal Scorer", cls: "badge-goals" });
+  if (p.assists === maxAssists && maxAssists > 0) badges.push({ label: "Top Assist", cls: "badge-assists" });
+  if ((Number(p.goalsPerApp) || 0) === maxGoalsPerApp && maxGoalsPerApp > 0) badges.push({ label: "Top Goals Per App", cls: "badge-goals-app" });
+  if ((Number(p.assistsPerApp) || 0) === maxAssistsPerApp && maxAssistsPerApp > 0) badges.push({ label: "Top Assists Per App", cls: "badge-assists-app" });
+  if ((Number(p.goalInvolvementPerApp) || 0) === maxGoalInvolvementPerApp && maxGoalInvolvementPerApp > 0) badges.push({ label: "Top Goal Involvement Per App", cls: "badge-gi-app" });
+  if (p.totw === maxTotw && maxTotw > 0) badges.push({ label: "Most TOTW", cls: "badge-totw" });
+  if (p.potw === maxPotw && maxPotw > 0) badges.push({ label: "Most POTW", cls: "badge-potw" });
+
+  badgeWrap.innerHTML = badges
+    .map(b => `<span class="achievement-pill ${b.cls}">${b.label}</span>`)
+    .join("");
+}
+
 function renderProfile(playerName) {
   if (!players.length || !playerName) return;
   const p = players.find(player => player.player === playerName);
@@ -275,7 +304,7 @@ function renderProfile(playerName) {
 
   document.getElementById("profileName").textContent = p.player;
   document.getElementById("profileRank").textContent = rank > 0 ? `League rank #${rank}` : "League rank —";
-  document.getElementById("profileAppsMeta").textContent = `${p.apps} appearance${p.apps === 1 ? "" : "s"}`;
+  renderProfileBadges(p);
 
   document.getElementById("profilePts").textContent = p.pts;
   document.getElementById("profileGoals").textContent = p.goals;
