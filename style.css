@@ -525,9 +525,9 @@ footer img{width:48px!important;height:56px!important;max-width:48px!important;o
 }
 
 
-/* ===== PLAYER PROFILE PHOTO — LARGE + CONSISTENT ===== */
+/* ===== PLAYER PROFILE PHOTO — DESKTOP NORMAL / MOBILE LARGER ===== */
 .profile-photo-panel {
-  padding: 18px 18px 0 !important;
+  padding: 24px 18px 0 !important;
 }
 
 .profile-photo-frame {
@@ -547,27 +547,45 @@ footer img{width:48px!important;height:56px!important;max-width:48px!important;o
   max-height: 560px !important;
   object-fit: contain !important;
   object-position: center bottom !important;
-  margin: 0 !important;
-  display: block;
+  filter: drop-shadow(0 20px 22px #0009);
 }
 
-@media (max-width: 700px) {
+/* Mobile: deliberately zoom the player image so it does not look tiny */
+@media (max-width: 720px) {
   .profile-photo-panel {
-    min-height: 440px !important;
-    padding: 10px 10px 0 !important;
+    min-height: 420px !important;
+    height: 420px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
   }
 
   .profile-photo-frame {
-    min-height: 430px !important;
-    height: 430px !important;
+    min-height: 420px !important;
+    height: 420px !important;
+    width: 100% !important;
+    overflow: hidden !important;
   }
 
   .profile-photo-frame #profilePhoto {
     width: 100% !important;
     height: 100% !important;
     max-width: none !important;
-    max-height: 430px !important;
+    max-height: none !important;
     object-fit: contain !important;
     object-position: center bottom !important;
+    transform: scale(1.55) !important;
+    transform-origin: center bottom !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .profile-photo-panel,
+  .profile-photo-frame {
+    min-height: 390px !important;
+    height: 390px !important;
+  }
+
+  .profile-photo-frame #profilePhoto {
+    transform: scale(1.65) !important;
   }
 }
