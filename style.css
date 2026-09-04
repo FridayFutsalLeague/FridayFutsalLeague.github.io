@@ -525,60 +525,49 @@ footer img{width:48px!important;height:56px!important;max-width:48px!important;o
 }
 
 
-/* Player profile photo sizing */
-.profile-photo,
-.player-profile-photo,
-#profilePhoto,
-.profile-hero img,
-.profile-image img {
-  width: 220px !important;
-  height: 220px !important;
-  max-width: 220px !important;
-  max-height: 220px !important;
-  object-fit: contain !important;
-  object-position: center !important;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+/* ===== PLAYER PROFILE PHOTO — LARGE + CONSISTENT ===== */
+.profile-photo-panel {
+  padding: 18px 18px 0 !important;
 }
 
-.profile-photo-wrap,
-.player-profile-photo-wrap,
-.profile-image,
-.profile-avatar,
-.profile-photo-container {
-  width: 220px !important;
-  height: 220px !important;
-  min-width: 220px !important;
-  min-height: 220px !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+.profile-photo-frame {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 540px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+.profile-photo-frame #profilePhoto {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: 560px !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+  margin: 0 !important;
+  display: block;
 }
 
 @media (max-width: 700px) {
-  .profile-photo,
-  .player-profile-photo,
-  #profilePhoto,
-  .profile-hero img,
-  .profile-image img {
-    width: 260px !important;
-    height: 260px !important;
-    max-width: 82vw !important;
-    max-height: 82vw !important;
+  .profile-photo-panel {
+    min-height: 440px !important;
+    padding: 10px 10px 0 !important;
   }
 
-  .profile-photo-wrap,
-  .player-profile-photo-wrap,
-  .profile-image,
-  .profile-avatar,
-  .profile-photo-container {
-    width: 260px !important;
-    height: 260px !important;
-    max-width: 82vw !important;
-    max-height: 82vw !important;
-    margin-left: auto;
-    margin-right: auto;
+  .profile-photo-frame {
+    min-height: 430px !important;
+    height: 430px !important;
+  }
+
+  .profile-photo-frame #profilePhoto {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: 430px !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
   }
 }
