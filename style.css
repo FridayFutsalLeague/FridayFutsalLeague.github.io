@@ -523,3 +523,62 @@ footer img{width:48px!important;height:56px!important;max-width:48px!important;o
   .team-record small{font-size:9px}
   .team-record i{font-size:16px}
 }
+
+
+/* Player profile photo sizing */
+.profile-photo,
+.player-profile-photo,
+#profilePhoto,
+.profile-hero img,
+.profile-image img {
+  width: 220px !important;
+  height: 220px !important;
+  max-width: 220px !important;
+  max-height: 220px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-photo-wrap,
+.player-profile-photo-wrap,
+.profile-image,
+.profile-avatar,
+.profile-photo-container {
+  width: 220px !important;
+  height: 220px !important;
+  min-width: 220px !important;
+  min-height: 220px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  .profile-photo,
+  .player-profile-photo,
+  #profilePhoto,
+  .profile-hero img,
+  .profile-image img {
+    width: 260px !important;
+    height: 260px !important;
+    max-width: 82vw !important;
+    max-height: 82vw !important;
+  }
+
+  .profile-photo-wrap,
+  .player-profile-photo-wrap,
+  .profile-image,
+  .profile-avatar,
+  .profile-photo-container {
+    width: 260px !important;
+    height: 260px !important;
+    max-width: 82vw !important;
+    max-height: 82vw !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
