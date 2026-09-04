@@ -589,3 +589,138 @@ footer img{width:48px!important;height:56px!important;max-width:48px!important;o
     transform: scale(1.65) !important;
   }
 }
+
+
+/* ===== HOME PAGE CORRECTED POLISH ===== */
+
+/* Team badges: larger */
+.team-badge-wrap {
+  width: 88px !important;
+  height: 88px !important;
+}
+.team-badge-wrap img {
+  width: 76px !important;
+  height: 76px !important;
+}
+
+/* Wins are the main number; draws are secondary */
+#redScore, #blueScore, #whiteScore, #blackScore {
+  font-size: 42px !important;
+  font-weight: 950 !important;
+}
+#redDraws, #blueDraws, #whiteDraws, #blackDraws {
+  font-size: 25px !important;
+  font-weight: 800 !important;
+  opacity: .82 !important;
+}
+.team-record > div:last-child small {
+  opacity: .72 !important;
+}
+
+/* POTW narrower, TOTW wider */
+.weekly-awards-grid {
+  grid-template-columns: minmax(300px, .72fr) minmax(520px, 1.28fr) !important;
+  gap: 16px !important;
+}
+
+/* Give TOTW more useful image space */
+.weekly-awards-grid .weekly-feature:first-child .weekly-image-frame {
+  min-height: 360px !important;
+}
+.weekly-awards-grid .weekly-feature:last-child .weekly-image-frame {
+  min-height: 420px !important;
+}
+.weekly-awards-grid .weekly-feature:last-child .weekly-image-frame img {
+  width: 100% !important;
+  max-height: 560px !important;
+  object-fit: contain !important;
+}
+
+/* News */
+.home-news-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+.news-card {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+.news-image {
+  display: block;
+  width: 100%;
+  height: 240px !important;
+  background: #0a0d10;
+}
+.news-image img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+}
+.news-copy {
+  padding: 18px !important;
+}
+.news-copy h3 {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  font-size: 20px !important;
+  line-height: 1.2 !important;
+  margin: 8px 0 14px !important;
+}
+.news-copy p {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  margin: 0 0 14px !important;
+  color: var(--muted) !important;
+}
+.news-copy p:last-child {
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .team-badge-wrap {
+    width: 66px !important;
+    height: 66px !important;
+  }
+  .team-badge-wrap img {
+    width: 58px !important;
+    height: 58px !important;
+  }
+
+  #redScore, #blueScore, #whiteScore, #blackScore {
+    font-size: 34px !important;
+  }
+  #redDraws, #blueDraws, #whiteDraws, #blackDraws {
+    font-size: 21px !important;
+  }
+
+  .weekly-awards-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .weekly-awards-grid .weekly-feature:first-child .weekly-image-frame {
+    min-height: 300px !important;
+  }
+  .weekly-awards-grid .weekly-feature:last-child .weekly-image-frame {
+    min-height: 320px !important;
+  }
+
+  .home-news-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .news-image {
+    height: 220px !important;
+  }
+
+  .news-copy h3 {
+    font-size: 19px !important;
+  }
+  .news-copy p {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+  }
+}

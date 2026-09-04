@@ -401,6 +401,16 @@ function loadImageWithFallback(img, fallback, src) {
   img.src = src;
 }
 
+
+function renderNewsParagraphs(text) {
+  return String(text || "")
+    .split(/\n\s*\n/)
+    .map(part => part.replace(/\s*\n\s*/g, " ").trim())
+    .filter(Boolean)
+    .map(part => `<p>${escapeHTML(part)}</p>`)
+    .join("");
+}
+
 function renderHome(data) {
   const folder = data["Weekly Folder"] || "assets/weekly/";
   const cleanFolder = folder.endsWith("/") ? folder : `${folder}/`;
@@ -442,7 +452,7 @@ function renderHome(data) {
       const image = story.image ? `${cleanFolder}${encodeURIComponent(story.image).replaceAll("%2F","/")}` : "";
       return `<article class="news-card panel">
         <div class="news-image">${image ? `<img src="${image}" alt="" onerror="this.parentElement.classList.add('no-image');this.remove()">` : ""}</div>
-        <div class="news-copy"><span>FFL News ${String(index+1).padStart(2,"0")}</span><h3>${escapeHTML(story.title || "Latest FFL story")}</h3><p>${escapeHTML(story.summary || "")}</p></div>
+        <div class="news-copy"><span>FFL News ${String(index+1).padStart(2,"0")}</span><h3>${escapeHTML(story.title || "Latest FFL story")}</h3>${renderNewsParagraphs(story.summary)}</div>
       </article>`;
     }).join("");
   }
